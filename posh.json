@@ -48,11 +48,13 @@
         },
         {
           "properties": {
-            "style": "folder"
+            "max_depth": 2,
+            "style": "folder",
+            "folder_icon": "="
           },
           "powerline_symbol": "",
           "foreground": "#E09546",
-          "template":"{{ if or (.Segments.Contains \"Project\") (.Segments.Contains \"Git\") }}{{ else }} {{ .Path }} {{ end }}<#e09546>\ue0b1</>",
+          "template":"{{ if not ( or ( and ( .Segments.Contains \"Git\") ( not ( .Segments.Contains \"Project\" ) )) ( and ( .Segments.Contains \"Project\") ( not ( .Segments.Contains \"Git\" ) ) ) ) }} {{ .Path }} {{ else }}{{ end }}<#e09546>\ue0b1</>",
           "type": "path",
           "style": "accordion"
         },
@@ -62,7 +64,7 @@
           "background": "#211A1E00",
           "foreground": "#FDE74C",
           "powerline_symbol": "",
-          "template": " {{ if .Name }}{{ .Name }}{{ end }} {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}v{{.Version}}{{ end }}{{ end }} "
+          "template": " {{ if and (.Name) (not (.Segments.Contains \"Git\" )) }}{{ .Name }} {{ end }}{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}v{{.Version}}{{ end }}{{ end }} "
         },
         {
           "type": "text",
@@ -81,7 +83,7 @@
             "{{ if gt .Ahead 0 }}#9952B7{{ end }}",
             "{{ if gt .Behind 0 }}#9952B7{{ end }}"
           ],
-          "template": " {{ .RepoName }} {{ .HEAD }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }} \ue0b1",
+          "template": " {{ if not (.Segments.Contains \"Project\" )}}{{ .RepoName }} {{ end }}{{ .HEAD }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }} \ue0b1",
 
           "properties": {
             "fetch_status": true,
