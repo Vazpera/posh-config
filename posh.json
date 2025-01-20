@@ -52,7 +52,7 @@
           },
           "powerline_symbol": "",
           "foreground": "#E09546",
-          "template":"{{ if .Segments.Contains \"Project\" }}{{ else }} {{ .Path }} {{ end }}<#e09546>\ue0b1</>",
+          "template":"{{ if or (.Segments.Contains \"Project\") (.Segments.Contains \"Git\") }}{{ else }} {{ .Path }} {{ end }}<#e09546>\ue0b1</>",
           "type": "path",
           "style": "accordion"
         },
