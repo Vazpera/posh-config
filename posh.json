@@ -62,7 +62,7 @@
           "background": "#211A1E00",
           "foreground": "#FDE74C",
           "powerline_symbol": "",
-          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}v{{.Version}} {{ if .Name }}{{ .Name }}{{ end }}{{ end }}{{ end }} "
+          "template": " {{ if .Name }}{{ .Name }}{{ end }} {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}v{{.Version}}{{ end }}{{ end }} "
         },
         {
           "type": "text",
