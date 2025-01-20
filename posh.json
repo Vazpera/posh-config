@@ -23,13 +23,13 @@
         {
             "type": "status",
             "style": "diamond",
-            "foreground": "#211A1E",
-            "background": "#5BC0EB",
-            "background_templates": [
+            "background": "#211A1E00",
+            "foreground": "#5BC0EB",
+            "foreground_templates": [
               "{{ if .Error }}#D26D9E{{ end }}"
             ],
-            "trailing_diamond": "",
-            "template": "<#211A1E></> {{ if .Error }}×{{ else }}✓{{ end }}",
+            "trailing_diamond": "",
+            "template": "<#211A1E00>\ue0b1</> {{ if .Error }}{{ else }}{{ end }}",
             "properties": {
               "always_enabled": true
             }
@@ -37,43 +37,52 @@
         {
           "type": "session",
           "style": "diamond",
-          "foreground": "#211A1E",
-          "background": "#c3423f",
-          
-          "template": " {{ if .SSHSession }} {{ end }}{{ .UserName }} "
+          "foreground": "#c3423f",
+          "trailing_diamond": "",
+          "template": "{{ if .SSHSession }} {{ end }}{{ .UserName }}"
+        },
+        {
+          "type": "text",
+          "foreground": "#c3423f",
+          "template": " \ue0b1"
         },
         {
           "properties": {
             "style": "folder"
           },
-          "foreground": "#211A1E",
-          "powerline_symbol": "\ue0b0",
-          "background": "#E09546",
-          "template":"{{ if .Segments.Contains \"Project\" }}{{ else }} {{ .Path }} {{ end }}",
+          "powerline_symbol": "",
+          "foreground": "#E09546",
+          "template":"{{ if .Segments.Contains \"Project\" }}{{ else }} {{ .Path }} {{ end }}<#e09546>\ue0b1</>",
           "type": "path",
           "style": "accordion"
         },
         {
           "type": "project",
           "style": "accordion",
-          "powerline_symbol": "",
-          "foreground": "#211A1E",
-          "background": "#FDE74C",
+          "background": "#211A1E00",
+          "foreground": "#FDE74C",
+          "powerline_symbol": "",
           "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}v{{.Version}} {{ if .Name }}{{ .Name }}{{ end }}{{ end }}{{ end }} "
+        },
+        {
+          "type": "text",
+          "foreground": "#fde74c",
+          "template": "\ue0b1"
         },
         {
           "type": "git",
           "style": "accordion",
-          "powerline_symbol": "",
-          "foreground": "#211A1E",
-          "background": "#9BC53D",
-          "background_templates": [
+          "powerline_symbol": "",
+          "background": "#211A1E00",
+          "foreground": "#9BC53D",
+          "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#5b5e68{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#E09546{{ end }}",
             "{{ if gt .Ahead 0 }}#9952B7{{ end }}",
             "{{ if gt .Behind 0 }}#9952B7{{ end }}"
           ],
-          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}\ue0b1",
+
           "properties": {
             "fetch_status": true,
             "fetch_upstream_icon": true,
@@ -86,6 +95,13 @@
               "bug/*": "🐛 "
             }
           }
+        },
+        {
+          "type": "text",
+          "foreground": "#9BC53D",
+          "template": "{{ if .Segments.Contains \"Git\" }}{{ else }}\ue0b1{{ end }}"
+
+        
         }
       ]
     }
